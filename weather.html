@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ajx.css">
+    <title></title>
+</head>
+
+<body style="background-color:#1693E5;">
+    <div id="heading">Weather Forecast Of Cities</div>
+    <div id="input">
+        <input placeholder="Enter City Name" id="city">
+        <button type="button" class="submitbuttoncss" onclick="show_temp()">Submit</button>
+    </div>
+    <script>
+        var countries = [
+            { "name": "Albania", "code": "AL" },
+            { "name": "Åland Islands", "code": "AX" },
+            { "name": "Algeria", "code": "DZ" },
+            { "name": "American Samoa", "code": "AS" },
+            { "name": "Andorra", "code": "AD" },
+            { "name": "Angola", "code": "AO" },
+            { "name": "Anguilla", "code": "AI" },
+            { "name": "Antarctica", "code": "AQ" },
+            { "name": "Antigua and Barbuda", "code": "AG" },
+            { "name": "Argentina", "code": "AR" },
+            { "name": "Armenia", "code": "AM" },
+            { "name": "Aruba", "code": "AW" },
+            { "name": "Australia", "code": "AU" },
+            { "name": "Austria", "code": "AT" },
+            { "name": "Azerbaijan", "code": "AZ" },
+            { "name": "Bahamas (the)", "code": "BS" },
+            { "name": "Bahrain", "code": "BH" },
+            { "name": "Bangladesh", "code": "BD" },
+            { "name": "Barbados", "code": "BB" },
+            { "name": "Belarus", "code": "BY" },
+            { "name": "Belgium", "code": "BE" },
+            { "name": "Belize", "code": "BZ" },
+            { "name": "Benin", "code": "BJ" },
+            { "name": "Bermuda", "code": "BM" },
+            { "name": "Bhutan", "code": "BT" },
+            { "name": "Bolivia", "code": "BO" },
+            { "name": "Bonaire", "code": "BQ" },
+            { "name": "Bosnia and Herzegovina", "code": "BA" },
+            { "name": "Botswana", "code": "BW" },
+            { "name": "Bouvet Island", "code": "BV" },
+            { "name": "Brazil", "code": "BR" },
+            { "name": "Brunei Darussalam", "code": "BN" },
+            { "name": "Bulgaria", "code": "BG" },
+            { "name": "Burkina Faso", "code": "BF" },
+            { "name": "Burundi", "code": "BI" },
+            { "name": "Cabo Verde", "code": "CV" },
+            { "name": "Cambodia", "code": "KH" },
+            { "name": "Cameroon", "code": "CM" },
+            { "name": "Canada", "code": "CA" },
+            { "name": "Cayman Islands", "code": "KY" },
+            { "name": "Chad", "code": "TD" },
+            { "name": "Chile", "code": "CL" },
+            { "name": "China", "code": "CN" },
+            { "name": "Christmas Island", "code": "CX" },
+            { "name": "Colombia", "code": "CO" },
+            { "name": "Comoros (the)", "code": "KM" },
+            { "name": "Congo", "code": "CD" },
+            { "name": "Congo (the)", "code": "CG" },
+            { "name": "Cook Islands (the)", "code": "CK" },
+            { "name": "Costa Rica", "code": "CR" },
+            { "name": "Croatia", "code": "HR" },
+            { "name": "Cuba", "code": "CU" },
+            { "name": "Curaçao", "code": "CW" },
+            { "name": "Cyprus", "code": "CY" },
+            { "name": "Czechia", "code": "CZ" },
+            { "name": "Côte d'Ivoire", "code": "CI" },
+            { "name": "Denmark", "code": "DK" },
+            { "name": "Djibouti", "code": "DJ" },
+            { "name": "Dominica", "code": "DM" },
+            { "name": "Dominican Republic", "code": "DO" },
+            { "name": "Ecuador", "code": "EC" },
+            { "name": "Egypt", "code": "EG" },
+            { "name": "El Salvador", "code": "SV" },
+            { "name": "Equatorial Guinea", "code": "GQ" },
+            { "name": "Eritrea", "code": "ER" },
+            { "name": "Estonia", "code": "EE" },
+            { "name": "Eswatini", "code": "SZ" },
+            { "name": "Ethiopia", "code": "ET" },
+            { "name": "Falkland Islands", "code": "FK" },
+            { "name": "Faroe Islands", "code": "FO" },
+            { "name": "Fiji", "code": "FJ" },
+            { "name": "Finland", "code": "FI" },
+            { "name": "France", "code": "FR" },
+            { "name": "French Guiana", "code": "GF" },
+            { "name": "French Polynesia", "code": "PF" },
+            { "name": "Gabon", "code": "GA" },
+            { "name": "Gambia (the)", "code": "GM" },
+            { "name": "Georgia", "code": "GE" },
+            { "name": "Germany", "code": "DE" },
+            { "name": "Ghana", "code": "GH" },
+            { "name": "Gibraltar", "code": "GI" },
+            { "name": "Greece", "code": "GR" },
+            { "name": "Greenland", "code": "GL" },
+            { "name": "Grenada", "code": "GD" },
+            { "name": "Guadeloupe", "code": "GP" },
+            { "name": "Guam", "code": "GU" },
+            { "name": "Guatemala", "code": "GT" },
+            { "name": "Guernsey", "code": "GG" },
+            { "name": "Guinea", "code": "GN" },
+            { "name": "Guinea-Bissau", "code": "GW" },
+            { "name": "Guyana", "code": "GY" },
+            { "name": "Haiti", "code": "HT" },
+            { "name": "Holy See (the)", "code": "VA" },
+            { "name": "Honduras", "code": "HN" },
+            { "name": "Hong Kong", "code": "HK" },
+            { "name": "Hungary", "code": "HU" },
+            { "name": "Iceland", "code": "IS" },
+            { "name": "India", "code": "IN" },
+            { "name": "Indonesia", "code": "ID" },
+            { "name": "Iran", "code": "IR" },
+            { "name": "Iraq", "code": "IQ" },
+            { "name": "Ireland", "code": "IE" },
+            { "name": "Isle of Man", "code": "IM" },
+            { "name": "Israel", "code": "IL" },
+            { "name": "Italy", "code": "IT" },
+            { "name": "Jamaica", "code": "JM" },
+            { "name": "Japan", "code": "JP" },
+            { "name": "Jersey", "code": "JE" },
+            { "name": "Jordan", "code": "JO" },
+            { "name": "Kazakhstan", "code": "KZ" },
+            { "name": "Kenya", "code": "KE" },
+            { "name": "Kiribati", "code": "KI" },
+            { "name": "Korea (Democratic Republic)", "code": "KP" },
+            { "name": "Korea (Republic)", "code": "KR" },
+            { "name": "Kuwait", "code": "KW" },
+            { "name": "Kyrgyzstan", "code": "KG" },
+            { "name": "Latvia", "code": "LV" },
+            { "name": "Lebanon", "code": "LB" },
+            { "name": "Lesotho", "code": "LS" },
+            { "name": "Liberia", "code": "LR" },
+            { "name": "Libya", "code": "LY" },
+            { "name": "Liechtenstein", "code": "LI" },
+            { "name": "Lithuania", "code": "LT" },
+            { "name": "Luxembourg", "code": "LU" },
+            { "name": "Macao", "code": "MO" },
+            { "name": "Madagascar", "code": "MG" },
+            { "name": "Malawi", "code": "MW" },
+            { "name": "Malaysia", "code": "MY" },
+            { "name": "Maldives", "code": "MV" },
+            { "name": "Mali", "code": "ML" },
+            { "name": "Malta", "code": "MT" },
+            { "name": "Marshall Islands", "code": "MH" },
+            { "name": "Martinique", "code": "MQ" },
+            { "name": "Mauritania", "code": "MR" },
+            { "name": "Mauritius", "code": "MU" },
+            { "name": "Mayotte", "code": "YT" },
+            { "name": "Mexico", "code": "MX" },
+            { "name": "Monaco", "code": "MC" },
+            { "name": "Mongolia", "code": "MN" },
+            { "name": "Montenegro", "code": "ME" },
+            { "name": "Montserrat", "code": "MS" },
+            { "name": "Morocco", "code": "MA" },
+            { "name": "Mozambique", "code": "MZ" },
+            { "name": "Myanmar", "code": "MM" },
+            { "name": "Namibia", "code": "NA" },
+            { "name": "Nauru", "code": "NR" },
+            { "name": "Nepal", "code": "NP" },
+            { "name": "Netherlands", "code": "NL" },
+            { "name": "New Caledonia", "code": "NC" },
+            { "name": "New Zealand", "code": "NZ" },
+            { "name": "Nicaragua", "code": "NI" },
+            { "name": "Niger (the)", "code": "NE" },
+            { "name": "Nigeria", "code": "NG" },
+            { "name": "Niue", "code": "NU" },
+            { "name": "Norfolk Island", "code": "NF" },
+            { "name": "Norway", "code": "NO" },
+            { "name": "Oman", "code": "OM" },
+            { "name": "Pakistan", "code": "PK" },
+            { "name": "Palau", "code": "PW" },
+            { "name": "Palestine", "code": "PS" },
+            { "name": "Panama", "code": "PA" },
+            { "name": "Papua New Guinea", "code": "PG" },
+            { "name": "Paraguay", "code": "PY" },
+            { "name": "Peru", "code": "PE" },
+            { "name": "Philippines", "code": "PH" },
+            { "name": "Pitcairn", "code": "PN" },
+            { "name": "Poland", "code": "PL" },
+            { "name": "Portugal", "code": "PT" },
+            { "name": "Puerto Rico", "code": "PR" },
+            { "name": "Qatar", "code": "QA" },
+            { "name": "Romania", "code": "RO" },
+            { "name": "Russian Federation (the)", "code": "RU" },
+            { "name": "Rwanda", "code": "RW" },
+            { "name": "Réunion", "code": "RE" },
+            { "name": "Saint Barthélemy", "code": "BL" },
+            { "name": "Saint Kitts and Nevis", "code": "KN" },
+            { "name": "Saint Lucia", "code": "LC" },
+            { "name": "Saint Martin", "code": "MF" },
+            { "name": "Saint Pierre and Miquelon", "code": "PM" },
+            { "name": "Samoa", "code": "WS" },
+            { "name": "San Marino", "code": "SM" },
+            { "name": "Sao Tome and Principe", "code": "ST" },
+            { "name": "Saudi Arabia", "code": "SA" },
+            { "name": "Senegal", "code": "SN" },
+            { "name": "Serbia", "code": "RS" },
+            { "name": "Seychelles", "code": "SC" },
+            { "name": "Sierra Leone", "code": "SL" },
+            { "name": "Singapore", "code": "SG" },
+            { "name": "Sint Maarten", "code": "SX" },
+            { "name": "Slovakia", "code": "SK" },
+            { "name": "Slovenia", "code": "SI" },
+            { "name": "Solomon Islands", "code": "SB" },
+            { "name": "Somalia", "code": "SO" },
+            { "name": "South Africa", "code": "ZA" },
+            { "name": "South Sudan", "code": "SS" },
+            { "name": "Spain", "code": "ES" },
+            { "name": "Sri Lanka", "code": "LK" },
+            { "name": "Sudan (the)", "code": "SD" },
+            { "name": "Suriname", "code": "SR" },
+            { "name": "Svalbard and Jan Mayen", "code": "SJ" },
+            { "name": "Sweden", "code": "SE" },
+            { "name": "Switzerland", "code": "CH" },
+            { "name": "Syrian Arab Republic", "code": "SY" },
+            { "name": "Taiwan (Province of China)", "code": "TW" },
+            { "name": "Tajikistan", "code": "TJ" },
+            { "name": "Tanzania", "code": "TZ" },
+            { "name": "Thailand", "code": "TH" },
+            { "name": "Timor-Leste", "code": "TL" },
+            { "name": "Togo", "code": "TG" },
+            { "name": "Tokelau", "code": "TK" },
+            { "name": "Tonga", "code": "TO" },
+            { "name": "Trinidad and Tobago", "code": "TT" },
+            { "name": "Tunisia", "code": "TN" },
+            { "name": "Turkey", "code": "TR" },
+            { "name": "Turkmenistan", "code": "TM" },
+            { "name": "Turks and Caicos Islands", "code": "TC" },
+            { "name": "Tuvalu", "code": "TV" },
+            { "name": "Uganda", "code": "UG" },
+            { "name": "Ukraine", "code": "UA" },
+            { "name": "United Arab Emirates", "code": "AE" },
+            { "name": "United Kingdom of Great Britain", "code": "GB" },
+            { "name": "United States of America", "code": "US" },
+            { "name": "Uruguay", "code": "UY" },
+            { "name": "Uzbekistan", "code": "UZ" },
+            { "name": "Vanuatu", "code": "VU" },
+            { "name": "Venezuela", "code": "VE" },
+            { "name": "Viet Nam", "code": "VN" },
+            { "name": "Virgin Islands (British)", "code": "VG" },
+            { "name": "Virgin Islands (U.S.)", "code": "VI" },
+            { "name": "Wallis and Futuna", "code": "WF" },
+            { "name": "Western Sahara", "code": "EH" },
+            { "name": "Yemen", "code": "YE" },
+            { "name": "Zambia", "code": "ZM" },
+            { "name": "Zimbabwe", "code": "ZW" }
+        ]
+        var months = { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec" };
+        var city_cnt = 0;
+        function show_temp() {
+            document.getElementById("output").style.color = "blue";
+            city_cnt++;
+            city = document.getElementById("city").value;
+            httpRequest = new XMLHttpRequest();
+            url = "https://api.weatherbit.io/v2.0/current?city=" + city + "&key=9ad06fcb2c224f62aecf3cfc4f731c2f";
+            httpRequest.open("GET", url);
+            httpRequest.send();
+            httpRequest.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    user_data = JSON.parse(this.responseText);
+                    for (let j = 0; j < countries.length; j++) {
+                        if (countries[j].code == user_data.data[0].country_code) {
+                            country_text = countries[j].name;
+                            break;
+                        }
+                        else country_text = "";
+                    }
+                    document.getElementById("place").innerHTML = city + ", " + country_text;
+                    datetime();
+                    document.getElementById("description").innerHTML = user_data.data[0].weather.description;
+                    document.getElementById("image").src = `./images/${user_data.data[0].weather.icon}.png`;
+                    document.getElementById("output").innerHTML = user_data.data[0].temp;
+                    dew_pnt = user_data.data[0].dewpt;
+                    temp = user_data.data[0].temp;
+                    h = 100 * (Math.pow(2.718, 17.625 * (dew_pnt / (243.04 + dew_pnt))) / Math.pow(2.718, 17.625 * (temp / (243.04 + temp))));
+                    document.getElementById("humidity").innerHTML = "Humidity: " + h.toFixed(2);
+                    if (user_data.data[0].precip == null) {
+                        precip = 0;
+                    }
+                    else precip = parseFloat(user_data.data[0].precip);
+                    document.getElementById("precipitation").innerHTML = "Precipitation: " + precip.toFixed(2) + " mm/hr";
+                    document.getElementById("wind").innerHTML = "Wind: " + user_data.data[0].wind_spd + " m/s";
+                    document.getElementById("weather-card").style.display = "flex";
+                    document.getElementById("celsius").style.display = "block";
+                    if (city_cnt == 1) {
+                        display('precipitation');
+                        display('wind');
+                        display('humidity');
+                    }
+                }
+            }
+        }
+
+        function display(str) {
+            if (document.getElementById(`${str}`).style.display == "none") {
+                document.getElementById(`${str}`).style.display = "block";
+                let items = document.getElementsByName(`${str}`);
+                items[0].style.backgroundColor = "rgb(116, 116, 234)";
+            }
+            else {
+                document.getElementById(`${str}`).style.display = "none";
+                let items = document.getElementsByName(`${str}`);
+                items[0].style.backgroundColor = "blue";
+            }
+        }
+
+        function datetime() {
+            var today = new Date();
+            date = today.getDate();
+            monthnum = today.getMonth() + 1;
+            minutes = today.getUTCMinutes() + 30;
+            hours = today.getUTCHours() + 5;
+            if (minutes >= 60) {
+                hours += 1;
+                minutes = minutes % 60;
+            }
+            if (hours >= 24) {
+                hours = hours % 24;
+            }
+            if (hours >= 12) {
+                meridiem = "pm";
+            }
+            else meridiem = "am";
+            if (minutes < 10) {
+                minuthead = "0";
+            }
+            else minuthead = "";
+            document.getElementById("time").innerHTML = date + " " + months[monthnum] + ", " + hours + ":" + minuthead + minutes + ` ${meridiem}`;
+        }
+    </script>
+    <div id="weather-card">
+        <div class="weather">
+            <div class="time-and-place">
+                <div id="place">City and State</div>
+                <div id="time">Tuesday,10:00 pm</div>
+                <div id="description">Broken Clouds</div>
+            </div>
+            <div class="weather-image">
+                <img id="image" src="">
+                <div id="output"></div>
+                <div id="celsius">&#8451;</div>
+            </div>
+        </div>
+        <div class="weather-details">
+            <div class="details">
+                <p id="precipitation">Precipitation</p>
+                <p id="wind">Wind</p>
+                <p id="humidity">Humidity</p><br>
+                <button name="precipitation" class="buttoncss" onclick="display('precipitation');">
+                    Precipitation</button>
+                <button name="wind" class="buttoncss" onclick="display('wind');"> Wind</button>
+                <button name="humidity" class="buttoncss" onclick="display('humidity');"> Humidity</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

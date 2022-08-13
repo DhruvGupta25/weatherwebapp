@@ -1,0 +1,140 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#input {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    display: flex;
+    flex-direction: row;
+}
+
+#celsius {
+    display: none;
+}
+
+#heading {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 35px;
+    font-family: "Helvetica Nueue";
+    margin-top: 2%;
+}
+
+#weather-card {
+    position: absolute;
+    background-color: white;
+    top: 30%;
+    left: 30%;
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+    height: 40%;
+    /* display: none; */
+}
+
+.details {
+    position: absolute;
+    top: 25%;
+}
+
+.weather {
+    width: 50%;
+}
+
+#precipitation {
+    display: none;
+}
+
+#wind {
+    display: none;
+}
+
+#humidity {
+    display: none;
+}
+
+.time-and-place {
+    height: 40%;
+    margin-left: 5%;
+}
+
+.weather-image {
+    display: flex;
+    flex-direction: row;
+}
+
+.weather-details {
+    width: 50%;
+    position: relative;
+    font-size: 20px;
+    color: rgb(61, 119, 254);
+}
+
+#output {
+    font-weight: bolder;
+    font-size: 40px;
+    margin-top: 10%;
+}
+
+#place {
+    font-size: 25px;
+    padding-top: 8%;
+    font-weight: bolder;
+    color: blue;
+}
+
+#time {
+    font-size: 18px;
+    color: rgb(61, 119, 254);
+}
+
+#description {
+    padding-top: 5%;
+    font-size: 18px;
+    color: rgb(61, 119, 254);
+}
+
+#celsius {
+    font-weight: bold;
+    color: blue;
+    font-size: 15px;
+    margin-top: 5%;
+    margin-left: 2%;
+}
+
+.submitbuttoncss {
+    color: white;
+    background-color: rgb(116, 116, 234);
+    margin-left: 2%;
+    width: auto;
+    border: solid blue;
+    height: 25px;
+    letter-spacing: 0.5px;
+    line-height: 20px;
+    padding: 0 5px 0 5px;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-family: 'Open Sans Condensed';
+    font-weight: bolder;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.buttoncss {
+    color: white;
+    background-color: blue;
+    border: solid blue;
+    height: 30px;
+    letter-spacing: 0.2px;
+    line-height: 5px;
+    padding: 0 2px 0 2px;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-family: 'Open Sans Condensed';
+    cursor: pointer;
+}
