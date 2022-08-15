@@ -259,7 +259,7 @@
             city_cnt++;
             city = document.getElementById("city").value;
             httpRequest = new XMLHttpRequest();
-            url = "https://api.weatherbit.io/v2.0/current?city=" + city + "&key=9ad06fcb2c224f62aecf3cfc4f731c2f";
+            url = "https://api.weatherbit.io/v2.0/current?city=" + city + "&key=c3ececc826b749f69b9ee52e75b6da48";
             httpRequest.open("GET", url);
             httpRequest.send();
             httpRequest.onreadystatechange = function () {
@@ -272,6 +272,7 @@
                         }
                         else country_text = "";
                     }
+                    console.log(user_data);
                     document.getElementById("place").innerHTML = city + ", " + country_text;
                     datetime();
                     document.getElementById("description").innerHTML = user_data.data[0].weather.description;
@@ -338,9 +339,9 @@
     <div id="weather-card">
         <div class="weather">
             <div class="time-and-place">
-                <div id="place">City and State</div>
-                <div id="time">Tuesday,10:00 pm</div>
-                <div id="description">Broken Clouds</div>
+                <div id="place"></div>
+                <div id="time"></div>
+                <div id="description"></div>
             </div>
             <div class="weather-image">
                 <img id="image" src="">
